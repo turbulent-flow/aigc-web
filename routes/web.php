@@ -12,5 +12,6 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'showForm']);
 Route::get('/register', [RegisterController::class, 'showForm']);
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::resource('users', UserController::class)->only(['store']);

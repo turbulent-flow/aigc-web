@@ -42,6 +42,25 @@ test('The login should not pass', function () {
         'name' => 'The credentials are not correct.'
     ]);
 
-    $response->assertRedirect(route('login'));
+    $response->assertRedirect('/login');
+    $this->assertGuest();
+});
+
+test('The logout should sign out', function () {
+    $user = User::factory()->create([
+        'name' => 'fake-name',
+        'email' => 'fake@example.com',
+        'password' => Hash::make('fpassword')
+    ]);
+
+
+    $this->post(route('login'), [
+        'username' => 'fake-name',
+        'password' => 'fpassword'
+    ]);
+
+    $response = $this->get('/logout');
+
+    $response->assertRedirect('/login');
     $this->assertGuest();
 });

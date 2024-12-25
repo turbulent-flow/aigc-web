@@ -32,8 +32,17 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
-        return redirect(route('login'))->withErrors([
+        return redirect('/login')->withErrors([
             'name' => 'The credentials are not correct.'
         ])->onlyInput('username');
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
