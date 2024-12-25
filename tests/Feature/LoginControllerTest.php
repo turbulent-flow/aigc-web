@@ -15,14 +15,13 @@ test('The login should authenticate the user', function () {
         'password' => Hash::make('fpassword')
     ]);
 
-
     $response = $this->post(route('login'), [
         'username' => 'fake-name',
         'password' => 'fpassword'
     ]);
 
     $response->assertValid();
-    $response->assertRedirect('/');
+    $response->assertRedirect(route('index'));
     $this->assertAuthenticatedAs($user);
 });
 
@@ -42,7 +41,7 @@ test('The login should not pass', function () {
         'name' => 'The credentials are not correct.'
     ]);
 
-    $response->assertRedirect('/login');
+    $response->assertRedirect(route('showLoginForm'));
     $this->assertGuest();
 });
 
@@ -59,8 +58,8 @@ test('The logout should sign out', function () {
         'password' => 'fpassword'
     ]);
 
-    $response = $this->get('/logout');
+    $response = $this->get(route('logout'));
 
-    $response->assertRedirect('/login');
+    $response->assertRedirect(route('showLoginForm'));
     $this->assertGuest();
 });

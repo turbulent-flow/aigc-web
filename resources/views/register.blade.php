@@ -4,7 +4,7 @@
 
 @section('content')
 <div>Register Form</div>
-<form action="{{ route('users.store') }}" method="post">
+<form action="{{ route('register') }}" method="post">
 	@csrf
 
 	@if ($errors->any())

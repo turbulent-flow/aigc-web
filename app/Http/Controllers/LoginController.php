@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
-use Hamcrest\Core\HasToString;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -17,7 +15,7 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function authenticate(UserLoginRequest $request): RedirectResponse
+    public function login(UserLoginRequest $request): RedirectResponse
     {
         $request->validated();
 
@@ -29,10 +27,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->intended(route('index'));
         }
 
-        return redirect('/login')->withErrors([
+        return redirect(route('showLoginForm'))->withErrors([
             'name' => 'The credentials are not correct.'
         ])->onlyInput('username');
     }
@@ -43,6 +41,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect(route('showLoginForm'));
     }
 }
