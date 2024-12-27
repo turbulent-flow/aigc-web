@@ -20,7 +20,7 @@ class AIGCTokenFactory extends Factory
             'user_id' => fake()->unique()->randomDigit(),
             'type' => 'normal',
             'available_numbers' => 5,
-            'expired_at' => now()
+            'expired_at' => now(),
         ];
     }
 }

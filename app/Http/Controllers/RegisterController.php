@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\AIGCToken;
-
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use App\Http\Requests\CreateUserRequest;
+use App\Models\AIGCToken;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class RegisterController extends Controller
 {
@@ -28,14 +27,14 @@ class RegisterController extends Controller
             $user = User::create([
                 'name' => $request['username'],
                 'password' => Hash::make($request['password']),
-                'email' => $request['email']
+                'email' => $request['email'],
             ]);
 
             AIGCToken::create([
                 'user_id' => $user->id,
                 'type' => 'normal',
                 'available_numbers' => 5,
-                'expired_at' => Carbon::now()->add(24, 'hour')
+                'expired_at' => Carbon::now()->add(24, 'hour'),
             ]);
         });
 

@@ -1,9 +1,7 @@
 <?php
 
 use App\Models\User;
-use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 uses(RefreshDatabase::class);
@@ -11,12 +9,12 @@ uses(RefreshDatabase::class);
 test('The login should authenticate the user', function () {
     $user = User::factory()->create([
         'name' => 'fake-name',
-        'password' => Hash::make('fpassword')
+        'password' => Hash::make('fpassword'),
     ]);
 
     $response = $this->post(route('login'), [
         'username' => 'fake-name',
-        'password' => 'fpassword'
+        'password' => 'fpassword',
     ]);
 
     $response->assertValid();
@@ -27,16 +25,16 @@ test('The login should authenticate the user', function () {
 test('The login should not pass', function () {
     $user = User::factory()->create([
         'name' => 'fake-name',
-        'password' => Hash::make('fpassword')
+        'password' => Hash::make('fpassword'),
     ]);
 
     $response = $this->post(route('login'), [
         'username' => 'fake-name',
-        'password' => 'password'
+        'password' => 'password',
     ]);
 
     $response->assertInvalid([
-        'name' => 'The credentials are not correct.'
+        'name' => 'The credentials are not correct.',
     ]);
 
     $response->assertRedirect(route('showLoginForm'));
@@ -46,13 +44,12 @@ test('The login should not pass', function () {
 test('The logout should sign out', function () {
     $user = User::factory()->create([
         'name' => 'fake-name',
-        'password' => Hash::make('fpassword')
+        'password' => Hash::make('fpassword'),
     ]);
-
 
     $this->post(route('login'), [
         'username' => 'fake-name',
-        'password' => 'fpassword'
+        'password' => 'fpassword',
     ]);
 
     $response = $this->get(route('logout'));

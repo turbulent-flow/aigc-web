@@ -21,7 +21,7 @@ class LoginController extends Controller
 
         $credentials = [
             'name' => $request['username'],
-            'password' => $request['password']
+            'password' => $request['password'],
         ];
 
         if (Auth::attempt($credentials)) {
@@ -31,7 +31,7 @@ class LoginController extends Controller
         }
 
         return redirect(route('showLoginForm'))->withErrors([
-            'name' => 'The credentials are not correct.'
+            'name' => 'The credentials are not correct.',
         ])->onlyInput('username');
     }
 

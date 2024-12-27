@@ -7,7 +7,7 @@ test('The index page should be accessed', function () {
     $user = User::factory()->create();
 
     AIGCToken::factory()->create([
-        'user_id' => $user->id
+        'user_id' => $user->id,
     ]);
 
     $response = $this->actingAs($user)->get('/');

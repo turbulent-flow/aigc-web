@@ -3,7 +3,6 @@
 use App\Models\AIGCToken;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 uses(RefreshDatabase::class);
@@ -13,7 +12,7 @@ test('The registration should create a user', function () {
         'username' => 'fake-name',
         'password' => 'fake-password',
         'password_confirmation' => 'fake-password',
-        'email' => 'fake@example.com'
+        'email' => 'fake@example.com',
     ];
 
     $response = $this->post(route('register'), $request);
@@ -33,7 +32,7 @@ test('The registration should create a user', function () {
 test('The registration should return a validation error', function () {
     $request = [
         'username' => 'fake-name',
-        'password' => 'fake-password'
+        'password' => 'fake-password',
     ];
 
     $response = $this->post(route('register', $request));

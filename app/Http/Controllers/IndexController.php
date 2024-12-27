@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -14,7 +13,7 @@ class IndexController extends Controller
         $user = User::with('aigcToken')->find(Auth::id());
 
         return view('index', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 }
