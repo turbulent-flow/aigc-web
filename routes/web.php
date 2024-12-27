@@ -5,7 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'])->name('index')->middleware('auth');
 
 Route::get('/register', [RegisterController::class, 'showForm'])->name('showRegisterForm');
 Route::post('/register', [RegisterController::class, 'createUser'])->name('register');
