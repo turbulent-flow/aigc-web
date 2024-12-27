@@ -11,7 +11,6 @@ uses(RefreshDatabase::class);
 test('The login should authenticate the user', function () {
     $user = User::factory()->create([
         'name' => 'fake-name',
-        'email' => 'fake@example.com',
         'password' => Hash::make('fpassword')
     ]);
 
@@ -28,7 +27,6 @@ test('The login should authenticate the user', function () {
 test('The login should not pass', function () {
     $user = User::factory()->create([
         'name' => 'fake-name',
-        'email' => 'fake@example.com',
         'password' => Hash::make('fpassword')
     ]);
 
@@ -48,7 +46,6 @@ test('The login should not pass', function () {
 test('The logout should sign out', function () {
     $user = User::factory()->create([
         'name' => 'fake-name',
-        'email' => 'fake@example.com',
         'password' => Hash::make('fpassword')
     ]);
 
