@@ -61,4 +61,89 @@ AIGC_SERVER_PORT=[YOUR_SERVER_PORT] # 默认是 4040
 php artisan serve
 ```
 
+### 4. 注册用户
+在浏览器输入：http://127.0.0.1:8000/register，输入你的账户信息。
+
+### 5. 生成令牌
+在终端输入下列命令，或者可以使用 postman 发送请求：
+```shell
+curl --location 'http://127.0.0.1:8000/api/tokens/create' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD"
+}'
+```
+把得到的 token 填进`.env`中的`API_V0_TOKEN`。
+
+### 6. 与 TCP Server 发送指令
+在与 aigc-alpha 交互时，需要确保 aigc-alpha 已经启动，请参考[文档](todo)。
+
+示例 1: 解释“心旷神怡”
+```shell
+curl --location 'http://127.0.0.1:8000/api/inquire' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer YOUR_API_TOKEN' \
+--data '{
+    "content": "心旷神怡",
+    "data_type": "text",
+    "operation_type": "explain_with_cn"
+}'
+```
+
+示例 2: 翻译“Lo and behold”
+```shell
+curl --location 'http://127.0.0.1:8000/api/inquire' \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer YOUR_API_TOKEN' \
+--data '{
+    "content": "Lo and behold",
+    "data_type": "text",
+    "operation_type": "translate_to_cn"
+}'
+```
+
 ## 测试
+### 1. 配置环境变量
+在项目根目录放置`.env.testing`，内容如下：
+```text
+APP_NAME=aigc-web-testing
+APP_ENV=local
+APP_KEY=[YOUR_API_KEY]
+APP_DEBUG=true
+APP_TIMEZONE=Asia/Shanghai
+APP_URL=http://localhost
+
+APP_LOCALE=en
+APP_FALLBACK_LOCALE=en
+APP_FAKER_LOCALE=en_US
+
+APP_MAINTENANCE_DRIVER=file
+# APP_MAINTENANCE_STORE=database
+
+PHP_CLI_SERVER_WORKERS=4
+
+BCRYPT_ROUNDS=12
+
+LOG_CHANNEL=stack
+LOG_STACK=single
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=aigc_web_test
+DB_USERNAME=[YOUR_DB_USERNAME]
+DB_PASSWORD=[YOUR_DB_PASSWORD]
+
+SESSION_DRIVER=array
+```
+
+### 2. 运行测试
+请确保测试环境下的数据迁移已经完成，然后在终端输入：
+```shell
+php artisan test
+```
