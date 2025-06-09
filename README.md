@@ -77,7 +77,7 @@ curl --location 'http://127.0.0.1:8000/api/tokens/create' \
 把得到的 token 填进`.env`中的`API_V0_TOKEN`。
 
 ### 6. 向 TCP Server 发送指令
-在与 aigc-alpha 交互时，需要确保 aigc-alpha 已经启动，请参考[文档](todo)。
+在与 aigc-alpha 交互时，需要确保 aigc-alpha 已经启动，请参考[文档](https://github.com/turbulent-flow/aigc-alpha/blob/main/README.md#%E6%9C%AC%E5%9C%B0%E5%90%AF%E5%8A%A8)。
 
 示例 1: 解释“心旷神怡”
 ```shell
