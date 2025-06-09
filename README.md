@@ -62,7 +62,7 @@ php artisan serve
 ```
 
 ### 4. 注册用户
-在浏览器输入：http://127.0.0.1:8000/register，输入你的账户信息。
+在浏览器输入：[http://127.0.0.1:8000/register](http://127.0.0.1:8000/register)，输入你的账户信息。
 
 ### 5. 生成令牌
 在终端输入下列命令，或者可以使用 postman 发送请求：
@@ -76,7 +76,7 @@ curl --location 'http://127.0.0.1:8000/api/tokens/create' \
 ```
 把得到的 token 填进`.env`中的`API_V0_TOKEN`。
 
-### 6. 与 TCP Server 发送指令
+### 6. 向 TCP Server 发送指令
 在与 aigc-alpha 交互时，需要确保 aigc-alpha 已经启动，请参考[文档](todo)。
 
 示例 1: 解释“心旷神怡”
